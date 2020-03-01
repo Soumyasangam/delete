@@ -19,10 +19,35 @@ app.get('/createacc',function(req,res){
     res.sendFile(__dirname+"/"+"reg.html");
     
 });
+app.get('/deleteacc',function1(req,res){
+    console.log("deleteacc page");
+    res.sendFile(__dirname+"/"+"reg.html");
+    
+});
 
 app.get('/post_createacc',function(req,res){
     console.log("post createacc function");
      let sql = `insert into student values("${req.query.name}","${req.query.an}","${req.query.gender}","${req.query.email}","${req.query.dept}",${req.query.age})`;
+ 
+	db.all(sql, [], (err, rows) => {
+	  if (err) {
+		throw err;
+	  }
+	  rows.forEach((row) => {
+		console.log(row.name);
+	  });
+	});
+	
+	var transporter = nodemailer.createTransport({
+	  service: 'yahoo',
+	  auth: {
+		user: 'email@yahoo.com',
+		pass: 'pass'
+	  }
+	});
+app.get('/post_deleteacc',function1(req,res){
+    console.log("post createacc function");
+     let sql = `DELETE FROM student WHERE an=$an`;
  
 	db.all(sql, [], (err, rows) => {
 	  if (err) {
